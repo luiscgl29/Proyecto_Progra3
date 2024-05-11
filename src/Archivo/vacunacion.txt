@@ -1,0 +1,5 @@
+Luis	32
+Carlos	17
+Pedro	18
+Estuardo	15
+Josvin	14

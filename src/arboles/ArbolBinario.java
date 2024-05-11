@@ -1,16 +1,20 @@
 package arboles;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import javax.swing.JOptionPane;
+
 public class ArbolBinario {
 
-    NodoArbol raiz;
+    public NodoArbol raiz;
 
     public ArbolBinario() {
         raiz = null;
     }
 
     //Metodo para insertar nodo en el arbol
-    public void AgregarNodo(int d, String nom) {
-        NodoArbol nuevo = new NodoArbol(d, nom);
+    public void AgregarNodo(String nom,long d) {
+        NodoArbol nuevo = new NodoArbol(nom,d);
 
         if (raiz == null) {
             raiz = nuevo;
@@ -20,7 +24,7 @@ public class ArbolBinario {
 
             while (true) {
                 padre = auxiliar;
-                if (d < auxiliar.dato) {
+                if (d < auxiliar.dpi) {
                     auxiliar = auxiliar.HijoIzquierdo;
                     if (auxiliar == null) {
                         padre.HijoIzquierdo = nuevo;
@@ -41,21 +45,21 @@ public class ArbolBinario {
         return raiz == null;
     }
 
+    //Metodo para metodo PreOrden
+    public void PreOrden(NodoArbol r) {
+        if (r != null) {
+            System.out.print(r.dpi + ", ");
+            PreOrden(r.HijoIzquierdo);
+            PreOrden(r.HijoDerecho);
+        }
+    }
+    
     //Metodo para metodo InOrden
     public void InOrden(NodoArbol r) {
         if (r != null) {
             InOrden(r.HijoIzquierdo);
-            System.out.print(r.dato + ", ");
+            System.out.print(r.dpi + ", ");
             InOrden(r.HijoDerecho);
-        }
-    }
-
-    //Metodo para metodo PreOrden
-    public void PreOrden(NodoArbol r) {
-        if (r != null) {
-            System.out.print(r.dato + ", ");
-            PreOrden(r.HijoIzquierdo);
-            PreOrden(r.HijoDerecho);
         }
     }
 
@@ -63,15 +67,15 @@ public class ArbolBinario {
         if (r != null) {
             PostOrden(r.HijoIzquierdo);
             PostOrden(r.HijoDerecho);
-            System.out.print(r.dato + ", ");
+            System.out.print(r.dpi + ", ");
         }
     }
 
     //Metodo para buscar un Nodo en el arbol
-    public NodoArbol BuscarNodo(int d) {
+    public NodoArbol BuscarNodo(long d) {
         NodoArbol aux = raiz;
-        while (aux.dato != d) {
-            if (d < aux.dato) {
+        while (aux.dpi != d) {
+            if (d < aux.dpi) {
                 aux = aux.HijoIzquierdo;
             } else {
                 aux = aux.HijoDerecho;
@@ -84,14 +88,14 @@ public class ArbolBinario {
         return aux;
     }
 
-    public boolean EliminarNodo(int d) {
+    public boolean EliminarNodo(long d) {
         NodoArbol auxiliar = raiz;
         NodoArbol padre = raiz;
         boolean EsHijoIzq = true;
 
-        while (auxiliar.dato != d) {
+        while (auxiliar.dpi != d) {
             padre = auxiliar;
-            if (d < auxiliar.dato) {
+            if (d < auxiliar.dpi) {
                 EsHijoIzq = true;
                 auxiliar = auxiliar.HijoIzquierdo;
             } else {
@@ -156,7 +160,40 @@ public class ArbolBinario {
             reemplazo.HijoDerecho = nodoreemp.HijoDerecho;
 
         }
-        System.out.println("El nodo reemplazo es: " + reemplazo.dato);
+        System.out.println("\nEl nodo reemplazo es: " + reemplazo.dpi);
         return reemplazo;
+    }
+
+    public void cargarNodoArchivo(String ruta) {
+        try {
+            BufferedReader leer = new BufferedReader(new FileReader(ruta));
+            String temp;
+            String linea;
+            while ((linea = leer.readLine()) != null) {
+                int ncadena = linea.length() - 13;
+                temp = "";
+                temp = temp + linea.substring(ncadena);
+                System.out.println(temp);
+            }
+            leer.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en lectura del archivo");
+        }
+    }
+
+    public void cargarArchivo(String ruta) {
+        try {
+            BufferedReader leer = new BufferedReader(new FileReader(ruta));
+            String linea;
+            while ((linea = leer.readLine()) != null) {
+                String[] partes = linea.split("\t");
+                String nombre = partes[0];
+                Long dpi = Long.parseLong(partes[1]);
+                AgregarNodo(nombre, dpi);
+            }
+            leer.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en lectura del archivo");
+        }
     }
 }

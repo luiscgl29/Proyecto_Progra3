@@ -28,7 +28,7 @@ public class Arboles {
                     case 1:
                         numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el numero del Nodo...", "Agregando un nodo", JOptionPane.QUESTION_MESSAGE));
                         nombre = JOptionPane.showInputDialog(null, "Ingresa el nombre del Nodo...", "Agregando un nodo", JOptionPane.QUESTION_MESSAGE);
-                        arbolito.AgregarNodo(numero, nombre);
+                        arbolito.AgregarNodo(nombre, numero);
                         break;
                     case 2:
                         if (!arbolito.EstaVacio()) {
@@ -56,7 +56,7 @@ public class Arboles {
                             if (tmp == null) {
                                 JOptionPane.showMessageDialog(null, "No se encontro el nodo", "No encontrado", JOptionPane.INFORMATION_MESSAGE);
                             } else {
-                                System.out.println("Nodo encontrado, Su contenido es: " + tmp.dato);
+                                System.out.println("Nodo encontrado, Su contenido es: " + tmp.dpi);
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "El Arbol esta vacio", "Error", JOptionPane.INFORMATION_MESSAGE);
