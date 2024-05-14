@@ -69,6 +69,4 @@ public class NodoArbol {
     public NodoArbol getHijoDerecho() {
         return HijoDerecho;
     }
-    
-    
 }

@@ -1,7 +1,6 @@
 package Interfaces;
 
 import arboles.ArbolBinario;
-import arboles.NodoArbol;
 import javax.swing.JOptionPane;
 
 public class ArbolBinarioBusqueda extends javax.swing.JFrame {
@@ -28,16 +27,16 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnPreOrden = new javax.swing.JButton();
+        btnInOrden = new javax.swing.JButton();
+        btnPostOrden = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnAgregarPaciente = new javax.swing.JButton();
+        btnBuscarPaciente = new javax.swing.JButton();
+        btnEliminarPaciente = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnCargarDocumento = new javax.swing.JButton();
+        btnGuardarDocumento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,24 +45,24 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Mostrar Informacion"));
 
-        jButton2.setText("Recorrido Pre Orden");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnPreOrden.setText("Recorrido Pre Orden");
+        btnPreOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnPreOrdenActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Recorrido In Orden");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnInOrden.setText("Recorrido In Orden");
+        btnInOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnInOrdenActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Recorrido Post Orden");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnPostOrden.setText("Recorrido Post Orden");
+        btnPostOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnPostOrdenActionPerformed(evt);
             }
         });
 
@@ -74,43 +73,43 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(btnPostOrden)
+                    .addComponent(btnInOrden)
+                    .addComponent(btnPreOrden))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jButton2)
+                .addComponent(btnPreOrden)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnInOrden)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btnPostOrden)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
-        jButton1.setText("Agregar Paciente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarPaciente.setText("Agregar Paciente");
+        btnAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAgregarPacienteActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Buscar Paciente");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarPaciente.setText("Buscar Paciente");
+        btnBuscarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnBuscarPacienteActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Eliminar Paciente");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarPaciente.setText("Eliminar Paciente");
+        btnEliminarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnEliminarPacienteActionPerformed(evt);
             }
         });
 
@@ -121,20 +120,20 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6)
-                    .addComponent(jButton1)
-                    .addComponent(jButton5))
+                    .addComponent(btnEliminarPaciente)
+                    .addComponent(btnAgregarPaciente)
+                    .addComponent(btnBuscarPaciente))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jButton1)
+                .addComponent(btnAgregarPaciente)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(btnBuscarPaciente)
                 .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(btnEliminarPaciente)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -168,14 +167,19 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Archivo"));
 
-        jButton7.setText("Cargar Documento");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnCargarDocumento.setText("Cargar Documento");
+        btnCargarDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnCargarDocumentoActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Guardar Documento");
+        btnGuardarDocumento.setText("Guardar Documento");
+        btnGuardarDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarDocumentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -183,9 +187,9 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jButton7)
+                .addComponent(btnCargarDocumento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(jButton8)
+                .addComponent(btnGuardarDocumento)
                 .addGap(21, 21, 21))
         );
         jPanel4Layout.setVerticalGroup(
@@ -193,8 +197,8 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(btnCargarDocumento)
+                    .addComponent(btnGuardarDocumento))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -222,47 +226,46 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnCargarDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDocumentoActionPerformed
         // TODO add your handling code here:
-        String ruta = "C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\infovacuna.txt";
-        //String ruta = "C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\vacunacion.txt";
-        abb.cargarArchivo(ruta);
-        //abb.cargarNodoArchivo(ruta);
-    }//GEN-LAST:event_jButton7ActionPerformed
+        //String ruta = "C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\vacunacion.txt"; //Ejemplo para solicitud de ubicacion
+        //abb.cargarNodoArchivo(ruta); //Ejemplo para ruta
+        abb.cargarArchivo();
+    }//GEN-LAST:event_btnCargarDocumentoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacienteActionPerformed
         // TODO add your handling code here:
         String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del paciente: ");
         long dpi = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el numero de Identificacion Personal: "));
-
+        
         abb.AgregarNodo(nombre, dpi);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAgregarPacienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnPreOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreOrdenActionPerformed
         // TODO add your handling code here:
         if (!abb.EstaVacio()) {
             System.out.println("");
             abb.PreOrden(abb.raiz);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnPreOrdenActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnInOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInOrdenActionPerformed
         // TODO add your handling code here:
         if (!abb.EstaVacio()) {
             System.out.println("");
             abb.InOrden(abb.raiz);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnInOrdenActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnPostOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostOrdenActionPerformed
         // TODO add your handling code here:
         if (!abb.EstaVacio()) {
             System.out.println("");
             abb.PostOrden(abb.raiz);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnPostOrdenActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
         // TODO add your handling code here:
         if (!abb.EstaVacio()) {
             long dpi = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el DPI del Paciente a Buscar: "));
@@ -271,9 +274,9 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El arbol esta vacio");
         }
 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnBuscarPacienteActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnEliminarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPacienteActionPerformed
         // TODO add your handling code here:
         if (!abb.EstaVacio()) {
             long dpi = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el DPI del Paciente a Eliminar: "));
@@ -285,7 +288,13 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "El arbol esta vacio");
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnEliminarPacienteActionPerformed
+
+    private void btnGuardarDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDocumentoActionPerformed
+        // TODO add your handling code here:
+        //String rutaguardar = "C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\infoguardada.txt";
+        abb.guardarArchivo();
+    }//GEN-LAST:event_btnGuardarDocumentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,14 +332,14 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btnAgregarPaciente;
+    private javax.swing.JButton btnBuscarPaciente;
+    private javax.swing.JButton btnCargarDocumento;
+    private javax.swing.JButton btnEliminarPaciente;
+    private javax.swing.JButton btnGuardarDocumento;
+    private javax.swing.JButton btnInOrden;
+    private javax.swing.JButton btnPostOrden;
+    private javax.swing.JButton btnPreOrden;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

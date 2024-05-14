@@ -2,6 +2,9 @@ package arboles;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class ArbolBinario {
@@ -13,8 +16,8 @@ public class ArbolBinario {
     }
 
     //Metodo para insertar nodo en el arbol
-    public void AgregarNodo(String nom,long d) {
-        NodoArbol nuevo = new NodoArbol(nom,d);
+    public void AgregarNodo(String nom, long d) {
+        NodoArbol nuevo = new NodoArbol(nom, d);
 
         if (raiz == null) {
             raiz = nuevo;
@@ -53,7 +56,7 @@ public class ArbolBinario {
             PreOrden(r.HijoDerecho);
         }
     }
-    
+
     //Metodo para metodo InOrden
     public void InOrden(NodoArbol r) {
         if (r != null) {
@@ -67,7 +70,7 @@ public class ArbolBinario {
         if (r != null) {
             PostOrden(r.HijoIzquierdo);
             PostOrden(r.HijoDerecho);
-            System.out.print(r.dpi + ", ");
+            System.out.print(r.nombre + "\t" + r.dpi + "  ");
         }
     }
 
@@ -164,16 +167,28 @@ public class ArbolBinario {
         return reemplazo;
     }
 
-    public void cargarNodoArchivo(String ruta) {
+    public void cargarArchivo() {
         try {
-            BufferedReader leer = new BufferedReader(new FileReader(ruta));
-            String temp;
+            BufferedReader leer = new BufferedReader(new FileReader("C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\infovacuna.txt"));
+            //BufferedReader leer = new BufferedReader(new FileReader("C:\\Users\\luis-\\Downloads\\Vacunados.txt"));
+            leer.readLine();
             String linea;
             while ((linea = leer.readLine()) != null) {
-                int ncadena = linea.length() - 13;
-                temp = "";
-                temp = temp + linea.substring(ncadena);
-                System.out.println(temp);
+                String[] partes = linea.split("\t");
+                String nombre = partes[0];
+                String dpi = partes[1];
+
+                Pattern pt = Pattern.compile("\\d+");
+                Matcher mt = pt.matcher(dpi);
+
+                String ndpi = "";
+                
+                while (mt.find()) {
+                    ndpi += mt.group();
+                }
+
+                Long dpiEntero = Long.parseLong(ndpi);
+                AgregarNodo(nombre, dpiEntero);
             }
             leer.close();
         } catch (Exception e) {
@@ -181,19 +196,28 @@ public class ArbolBinario {
         }
     }
 
-    public void cargarArchivo(String ruta) {
+    public void imprimir(NodoArbol r, FileWriter guardar) {
         try {
-            BufferedReader leer = new BufferedReader(new FileReader(ruta));
-            String linea;
-            while ((linea = leer.readLine()) != null) {
-                String[] partes = linea.split("\t");
-                String nombre = partes[0];
-                Long dpi = Long.parseLong(partes[1]);
-                AgregarNodo(nombre, dpi);
+            if (r != null) {
+                imprimir(r.HijoIzquierdo, guardar);
+                imprimir(r.HijoDerecho, guardar);
+                String datos = r.nombre + "\t" + r.dpi + "\n";
+                guardar.write(datos);
             }
-            leer.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error en lectura del archivo");
+            JOptionPane.showMessageDialog(null, "Error en recorrido");
+        }
+    }
+
+    public void guardarArchivo() {
+        try {
+            FileWriter guardar = new FileWriter("C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\PacientesGuardados.txt", true);
+            guardar.write("NOMBRE DE PERSONA VACUNADA" + "\t" + "NÚMERO DE IDENTIFICACIÓN" + "\n");
+            imprimir(raiz, guardar);
+            guardar.close();
+            JOptionPane.showMessageDialog(null, "Lineas guardads");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en escritura del archivo");
         }
     }
 }
