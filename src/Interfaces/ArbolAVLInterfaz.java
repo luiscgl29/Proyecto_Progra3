@@ -1,21 +1,28 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package Interfaces;
 
-import arboles.ArbolBinario;
-import arboles.NodoArbol;
+import arboles.ArbolAVL;
+import arboles.NodoArbolAVL;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
-public class ArbolBinarioBusqueda extends javax.swing.JFrame {
+/**
+ *
+ * @author luis-
+ */
+public class ArbolAVLInterfaz extends javax.swing.JFrame {
 
     /**
-     * Creates new form ArbolBinarioBusqueda
+     * Creates new form ArbolAVLInterfaz
      */
-    ArbolBinario abb = new ArbolBinario();
-    NodoArbol tmp;
+    ArbolAVL aAVL = new ArbolAVL();
+    NodoArbolAVL tmpBuscar;
 
-    public ArbolBinarioBusqueda() {
+    public ArbolAVLInterfaz() {
         initComponents();
         this.setLocationRelativeTo(null);
         bloquearCampos();
@@ -111,16 +118,17 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(0, 43, 89));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Informacion de Vacunacion COVID-19 | Arbol ABB");
+        jLabel1.setText("Informacion de Vacunacion COVID-19 | Arbol AVL");
 
-        jPanel2.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel2.setBackground(new java.awt.Color(0, 43, 89));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mostrar Informacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnPreOrden.setBackground(new java.awt.Color(0, 102, 51));
+        btnPreOrden.setBackground(new java.awt.Color(51, 51, 0));
         btnPreOrden.setForeground(new java.awt.Color(255, 255, 255));
         btnPreOrden.setText("Recorrido Pre Orden");
         btnPreOrden.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +137,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnInOrden.setBackground(new java.awt.Color(0, 102, 51));
+        btnInOrden.setBackground(new java.awt.Color(51, 51, 0));
         btnInOrden.setForeground(new java.awt.Color(255, 255, 255));
         btnInOrden.setText("Recorrido In Orden");
         btnInOrden.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +146,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnPostOrden.setBackground(new java.awt.Color(0, 102, 51));
+        btnPostOrden.setBackground(new java.awt.Color(51, 51, 0));
         btnPostOrden.setForeground(new java.awt.Color(255, 255, 255));
         btnPostOrden.setText("Recorrido Post Orden");
         btnPostOrden.addActionListener(new java.awt.event.ActionListener() {
@@ -171,10 +179,11 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel3.setBackground(new java.awt.Color(0, 43, 89));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        btnAgregarPaciente.setBackground(new java.awt.Color(0, 51, 102));
+        btnAgregarPaciente.setBackground(new java.awt.Color(0, 51, 51));
         btnAgregarPaciente.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarPaciente.setText("Agregar Paciente");
         btnAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -183,7 +192,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnBuscarPaciente.setBackground(new java.awt.Color(0, 51, 102));
+        btnBuscarPaciente.setBackground(new java.awt.Color(0, 51, 51));
         btnBuscarPaciente.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscarPaciente.setText("Buscar Paciente");
         btnBuscarPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +201,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarPaciente.setBackground(new java.awt.Color(0, 51, 102));
+        btnEliminarPaciente.setBackground(new java.awt.Color(0, 51, 51));
         btnEliminarPaciente.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarPaciente.setText("Eliminar Paciente");
         btnEliminarPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -225,6 +234,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tablaInformacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tablaInformacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -235,10 +245,11 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablaInformacion);
 
-        jPanel4.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel4.setBackground(new java.awt.Color(0, 43, 89));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Archivo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnCargarDocumento.setBackground(new java.awt.Color(102, 51, 0));
+        btnCargarDocumento.setBackground(new java.awt.Color(0, 30, 5));
         btnCargarDocumento.setForeground(new java.awt.Color(255, 255, 255));
         btnCargarDocumento.setText("Cargar Documento");
         btnCargarDocumento.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +258,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnGuardarDocumento.setBackground(new java.awt.Color(102, 51, 0));
+        btnGuardarDocumento.setBackground(new java.awt.Color(0, 30, 5));
         btnGuardarDocumento.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardarDocumento.setText("Guardar Documento");
         btnGuardarDocumento.addActionListener(new java.awt.event.ActionListener() {
@@ -256,7 +267,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnCrearGraphviz.setBackground(new java.awt.Color(102, 51, 0));
+        btnCrearGraphviz.setBackground(new java.awt.Color(0, 30, 5));
         btnCrearGraphviz.setForeground(new java.awt.Color(255, 255, 255));
         btnCrearGraphviz.setText("Crear Graphviz");
         btnCrearGraphviz.addActionListener(new java.awt.event.ActionListener() {
@@ -265,7 +276,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnCifrar.setBackground(new java.awt.Color(102, 51, 0));
+        btnCifrar.setBackground(new java.awt.Color(0, 30, 5));
         btnCifrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCifrar.setText("Cifrar Documento");
         btnCifrar.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +285,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnDescifrar.setBackground(new java.awt.Color(102, 51, 0));
+        btnDescifrar.setBackground(new java.awt.Color(0, 30, 5));
         btnDescifrar.setForeground(new java.awt.Color(255, 255, 255));
         btnDescifrar.setText("Descifrar Documento");
         btnDescifrar.addActionListener(new java.awt.event.ActionListener() {
@@ -318,8 +329,9 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        jPanel5.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel5.setBackground(new java.awt.Color(0, 43, 89));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel5.setForeground(new java.awt.Color(255, 255, 255));
 
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("Nombre: ");
@@ -360,7 +372,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Lugar de Vacunacion: ");
 
-        btnLimpiar.setBackground(new java.awt.Color(28, 0, 28));
+        btnLimpiar.setBackground(new java.awt.Color(66, 22, 0));
         btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpiar.setText("Limpiar Datos");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -369,7 +381,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnActualizar.setBackground(new java.awt.Color(28, 0, 28));
+        btnActualizar.setBackground(new java.awt.Color(66, 22, 0));
         btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -378,7 +390,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
             }
         });
 
-        btnBorrarArbol.setBackground(new java.awt.Color(28, 0, 28));
+        btnBorrarArbol.setBackground(new java.awt.Color(66, 22, 0));
         btnBorrarArbol.setForeground(new java.awt.Color(255, 255, 255));
         btnBorrarArbol.setText("Borrar Arbol");
         btnBorrarArbol.addActionListener(new java.awt.event.ActionListener() {
@@ -391,7 +403,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombre)
@@ -424,12 +436,12 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
                             .addComponent(txt3Vacuna)
                             .addComponent(txt2Vacuna, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                             .addComponent(txtLugar))))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBorrarArbol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(34, 34, 34))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBorrarArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar))
+                .addGap(39, 39, 39))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,15 +464,11 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
                         .addGap(46, 46, 46))
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txt2Vacuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7))
-                                    .addGap(26, 26, 26))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                    .addComponent(btnActualizar)
-                                    .addGap(18, 18, 18)))
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txt2Vacuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)
+                                .addComponent(btnActualizar))
+                            .addGap(25, 25, 25)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
                                 .addComponent(txt3Vacuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -503,9 +511,9 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
                         .addGap(47, 47, 47)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(318, 318, 318)
+                        .addGap(323, 323, 323)
                         .addComponent(jLabel1)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,10 +531,8 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jMenuBar1.setOpaque(true);
 
         jMenu1.setText("Regresar");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -543,7 +549,7 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,117 +559,101 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCargarDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDocumentoActionPerformed
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         // TODO add your handling code here:
-        File archivo;
-        JFileChooser seleccionarArchivo;
-        seleccionarArchivo = new JFileChooser();
-        seleccionarArchivo.showOpenDialog(null);
-        archivo = seleccionarArchivo.getSelectedFile();
+        Principal ventana = new Principal();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenu1MouseClicked
 
-        abb.cargarArchivo(archivo);
-        abb.mostrarDatos(tablaInformacion, 1);
-    }//GEN-LAST:event_btnCargarDocumentoActionPerformed
+    private void btnPreOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreOrdenActionPerformed
+        // TODO add your handling code here:
+        aAVL.mostrarDatos(tablaInformacion, 1);
+    }//GEN-LAST:event_btnPreOrdenActionPerformed
+
+    private void btnInOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInOrdenActionPerformed
+        // TODO add your handling code here:
+        aAVL.mostrarDatos(tablaInformacion, 2);
+    }//GEN-LAST:event_btnInOrdenActionPerformed
+
+    private void btnPostOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostOrdenActionPerformed
+        // TODO add your handling code here:
+        aAVL.mostrarDatos(tablaInformacion, 3);
+    }//GEN-LAST:event_btnPostOrdenActionPerformed
 
     private void btnAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacienteActionPerformed
         // TODO add your handling code here:
         String nom = JOptionPane.showInputDialog(null, "Ingrese el nombre del paciente: ");
         long dpi = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el numero de Identificacion Personal: "));
 
-        abb.AgregarNodo(nom, dpi);
-        abb.mostrarDatos(tablaInformacion, 1);
+        aAVL.insertar(nom, dpi);
+        aAVL.mostrarDatos(tablaInformacion, 1);
     }//GEN-LAST:event_btnAgregarPacienteActionPerformed
-
-    private void btnPreOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreOrdenActionPerformed
-        // TODO add your handling code here:
-        abb.mostrarDatos(tablaInformacion, 1);
-    }//GEN-LAST:event_btnPreOrdenActionPerformed
-
-    private void btnInOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInOrdenActionPerformed
-        // TODO add your handling code here:
-        abb.mostrarDatos(tablaInformacion, 2);
-    }//GEN-LAST:event_btnInOrdenActionPerformed
-
-    private void btnPostOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostOrdenActionPerformed
-        // TODO add your handling code here:
-        abb.mostrarDatos(tablaInformacion, 3);
-    }//GEN-LAST:event_btnPostOrdenActionPerformed
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
         // TODO add your handling code here:
-        if (!abb.EstaVacio()) {
-            tmp = abb.raiz;
-            long dpi = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el DPI del Paciente a Buscar: "));
-            if (abb.BuscarNodo(dpi) == null) {
-                JOptionPane.showMessageDialog(null, "El registro del paciente no existe");
-            } else {
-                tmp = abb.BuscarNodo(dpi);
-                txtNombre.setText(tmp.getNombre());
-                txtDPI.setText(String.valueOf(tmp.getDpi()));
-                txtDepartamento.setText(tmp.getDepartamento());
-                txtMunicipio.setText(tmp.getMunicipio());
-                txtDosis.setText(tmp.getCantidadDosis());
-                txt1Vacuna.setText(tmp.getFechaPrimera());
-                txt2Vacuna.setText(tmp.getFechaSegunda());
-                txt3Vacuna.setText(tmp.getFechaTercera());
-                txtLugar.setText(tmp.getLugarVacunacion());
+        
+        long dpi = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el DPI del Paciente a Buscar: "));
+        tmpBuscar = aAVL.buscar(dpi);
+        txtNombre.setText(tmpBuscar.getNombre());
+        txtDPI.setText(String.valueOf(tmpBuscar.getDpi()));
+        txtDepartamento.setText(tmpBuscar.getDepartamento());
+        txtMunicipio.setText(tmpBuscar.getMunicipio());
+        txtDosis.setText(tmpBuscar.getCantidadDosis());
+        txt1Vacuna.setText(tmpBuscar.getFechaPrimera());
+        txt2Vacuna.setText(tmpBuscar.getFechaSegunda());
+        txt3Vacuna.setText(tmpBuscar.getFechaTercera());
+        txtLugar.setText(tmpBuscar.getLugarVacunacion());
 
-                JOptionPane.showMessageDialog(null, "Paciente encontrado");
-                desbloquearCampos();
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "El arbol esta vacio");
-        }
+        desbloquearCampos();
     }//GEN-LAST:event_btnBuscarPacienteActionPerformed
 
     private void btnEliminarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPacienteActionPerformed
         // TODO add your handling code here:
-        if (!abb.EstaVacio()) {
-            long dpi = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el DPI del Paciente a Eliminar: "));
-            if (abb.EliminarNodo(dpi) == false) {
-                JOptionPane.showMessageDialog(null, "Paciente no encontrado");
-            } else {
-                JOptionPane.showMessageDialog(null, "Paciente Eliminado");
-                abb.mostrarDatos(tablaInformacion, 1);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "El arbol esta vacio");
-        }
+        long dpi = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el DPI del Paciente a Eliminar: "));
+        aAVL.eliminar(dpi);
+        aAVL.mostrarDatos(tablaInformacion, 1);
     }//GEN-LAST:event_btnEliminarPacienteActionPerformed
+
+    private void btnCargarDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDocumentoActionPerformed
+        // TODO add your handling code here:
+        //String ruta = "C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\vacunacion.txt"; //Ejemplo para solicitud de ubicacion
+        //abb.cargarNodoArchivo(ruta); //Ejemplo para ruta
+        File archivo;
+        JFileChooser seleccionarArchivo;
+        seleccionarArchivo = new JFileChooser();
+        seleccionarArchivo.showOpenDialog(null);
+        archivo = seleccionarArchivo.getSelectedFile();
+
+        aAVL.cargarArchivo(archivo);
+        aAVL.mostrarDatos(tablaInformacion, 1);
+    }//GEN-LAST:event_btnCargarDocumentoActionPerformed
 
     private void btnGuardarDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDocumentoActionPerformed
         // TODO add your handling code here:
-        abb.guardarArchivo();
+        //String rutaguardar = "C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\infoguardada.txt";
+        aAVL.guardarArchivo();
     }//GEN-LAST:event_btnGuardarDocumentoActionPerformed
 
     private void btnCrearGraphvizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearGraphvizActionPerformed
         // TODO add your handling code here:
-        abb.dibujarGraphviz();
-        JOptionPane.showMessageDialog(null, "Documento generado en la ruta del proyecto: \nProyecto_Progra3\\arbolABB.png");
+        aAVL.dibujarGraphviz();
+        JOptionPane.showMessageDialog(null, "Documento generado en la ruta del proyecto: \nProyecto_Progra3\\arbolAVL.png");
     }//GEN-LAST:event_btnCrearGraphvizActionPerformed
-
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        // TODO add your handling code here:
-        Principal ventana = new Principal();
-        ventana.setVisible(true);
-        ventana.setLocationRelativeTo(null);
-        this.setVisible(false);
-    }//GEN-LAST:event_jMenu1MouseClicked
 
     private void btnCifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCifrarActionPerformed
         // TODO add your handling code here:
-        abb.limpiarTabla(tablaInformacion);
-        abb.datosCodificar(abb.raiz);
-        abb.txtCrifrado(abb.raiz);
-        abb.mostrarDatos(tablaInformacion, 1);
+        aAVL.limpiarTabla(tablaInformacion);
+        aAVL.datosCodificar(aAVL.raiz);
+        aAVL.txtCrifrado(aAVL.raiz);
+        aAVL.mostrarDatos(tablaInformacion, 1);
     }//GEN-LAST:event_btnCifrarActionPerformed
 
     private void btnDescifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescifrarActionPerformed
         // TODO add your handling code here:
-        abb.datosDecodificar(abb.raiz);
+        aAVL.datosDecodificar(aAVL.raiz);
         JOptionPane.showMessageDialog(null, "Datos Decodificados");
-        abb.mostrarDatos(tablaInformacion, 1);
+        aAVL.mostrarDatos(tablaInformacion, 1);
     }//GEN-LAST:event_btnDescifrarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -674,44 +664,44 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt1VacunaActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiarCampos();
+        aAVL.limpiarTabla(tablaInformacion);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
         String nombre = txtNombre.getText();
-        tmp.setNombre(nombre);
+        tmpBuscar.setNombre(nombre);
         Long dpi = Long.parseLong(txtDPI.getText());
-        tmp.setDpi(dpi);
+        tmpBuscar.setDpi(dpi);
         String departamento = txtDepartamento.getText();
-        tmp.setDepartamento(departamento);
+        tmpBuscar.setDepartamento(departamento);
         String municipio = txtMunicipio.getText();
-        tmp.setMunicipio(municipio);
+        tmpBuscar.setMunicipio(municipio);
         String dosis = txtDosis.getText();
-        tmp.setCantidadDosis(dosis);
+        tmpBuscar.setCantidadDosis(dosis);
         String fecha1 = txt1Vacuna.getText();
-        tmp.setFechaPrimera(fecha1);
+        tmpBuscar.setFechaPrimera(fecha1);
         String fecha2 = txt2Vacuna.getText();
-        tmp.setFechaSegunda(fecha2);
+        tmpBuscar.setFechaSegunda(fecha2);
         String fecha3 = txt3Vacuna.getText();
-        tmp.setFechaTercera(fecha3);
+        tmpBuscar.setFechaTercera(fecha3);
         String lugar = txtLugar.getText();
-        tmp.setLugarVacunacion(lugar);
-
+        tmpBuscar.setLugarVacunacion(lugar);
+        
         JOptionPane.showMessageDialog(null, "Datos actualizados");
 
-        abb.mostrarDatos(tablaInformacion, 1);
+        aAVL.mostrarDatos(tablaInformacion, 1);
         bloquearCampos();
         limpiarCampos();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
-        limpiarCampos();
-        abb.limpiarTabla(tablaInformacion);
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
     private void btnBorrarArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarArbolActionPerformed
         // TODO add your handling code here:
-        abb.raiz = null;
-        abb.mostrarDatos(tablaInformacion, 1);
+        aAVL.raiz = null;
+        aAVL.mostrarDatos(tablaInformacion, 1);
     }//GEN-LAST:event_btnBorrarArbolActionPerformed
 
     /**
@@ -731,20 +721,20 @@ public class ArbolBinarioBusqueda extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ArbolBinarioBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArbolAVL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ArbolBinarioBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArbolAVL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ArbolBinarioBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArbolAVL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ArbolBinarioBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ArbolAVL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ArbolBinarioBusqueda().setVisible(true);
+                new ArbolAVLInterfaz().setVisible(true);
             }
         });
     }

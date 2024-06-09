@@ -1,8 +1,17 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package arboles;
 
-public class NodoArbol {
+/**
+ *
+ * @author luis-
+ */
+public class NodoArbolAVL {
 
     long dpi;
+    int fe;
     String nombre;
     String departamento;
     String municipio;
@@ -11,16 +20,16 @@ public class NodoArbol {
     String fechaSegunda;
     String fechaTercera;
     String lugarVacunacion;
-    
-    String textoGraphviz;
-    
-    NodoArbol HijoIzquierdo, HijoDerecho;
 
-    public NodoArbol() {
+    String textoGraphviz;
+
+    NodoArbolAVL hijoIzquierdoAVL, hijoDerechoAVL;
+
+    public NodoArbolAVL() {
 
     }
 
-    public NodoArbol(String nom,long cui) {
+    public NodoArbolAVL(String nom, long cui) {
         this.nombre = nom;
         this.dpi = cui;
         this.departamento = "";
@@ -30,13 +39,18 @@ public class NodoArbol {
         this.fechaSegunda = "";
         this.fechaTercera = "";
         this.lugarVacunacion = "";
-        this.HijoIzquierdo = null;
-        this.HijoDerecho = null;
+        this.fe = 0;
+        this.hijoIzquierdoAVL = null;
+        this.hijoDerechoAVL = null;
     }
 
     //METODOS GETTERS
     public long getDpi() {
         return dpi;
+    }
+
+    public int getFe() {
+        return fe;
     }
 
     public String getNombre() {
@@ -71,17 +85,26 @@ public class NodoArbol {
         return lugarVacunacion;
     }
 
-    public NodoArbol getHijoIzquierdo() {
-        return HijoIzquierdo;
+    public String getTextoGraphviz() {
+        return textoGraphviz;
     }
 
-    public NodoArbol getHijoDerecho() {
-        return HijoDerecho;
+    public NodoArbolAVL getHijoIzquierdoAVL() {
+        return hijoIzquierdoAVL;
+    }
+
+    public NodoArbolAVL getHijoDerechoAVL() {
+        return hijoDerechoAVL;
     }
 
     //METODOS SETTERS
+
     public void setDpi(long dpi) {
         this.dpi = dpi;
+    }
+
+    public void setFe(int fe) {
+        this.fe = fe;
     }
 
     public void setNombre(String nombre) {
@@ -116,11 +139,16 @@ public class NodoArbol {
         this.lugarVacunacion = lugarVacunacion;
     }
 
-    public void setHijoIzquierdo(NodoArbol HijoIzquierdo) {
-        this.HijoIzquierdo = HijoIzquierdo;
+    public void setTextoGraphviz(String textoGraphviz) {
+        this.textoGraphviz = textoGraphviz;
     }
 
-    public void setHijoDerecho(NodoArbol HijoDerecho) {
-        this.HijoDerecho = HijoDerecho;
+    public void setHijoIzquierdoAVL(NodoArbolAVL hijoIzquierdoAVL) {
+        this.hijoIzquierdoAVL = hijoIzquierdoAVL;
     }
+
+    public void setHijoDerechoAVL(NodoArbolAVL hijoDerechoAVL) {
+        this.hijoDerechoAVL = hijoDerechoAVL;
+    }
+    
 }

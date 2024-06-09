@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package arboles;
 
 import java.io.BufferedReader;
@@ -13,166 +17,202 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class ArbolBinario {
+/**
+ *
+ * @author luis-
+ */
+public class ArbolAVL {
 
-    public NodoArbol raiz;
+    public NodoArbolAVL raiz;
 
-    public ArbolBinario() {
+    public ArbolAVL() {
         raiz = null;
     }
 
-    //Metodo para insertar nodo en el arbol
-    public void AgregarNodo(String nom, long cui) {
-        if(raiz == null){
-            raiz = new NodoArbol(nom, cui);
-            return;
+    public NodoArbolAVL buscar(long d) {
+        NodoArbolAVL aux = raiz;
+        while (aux.dpi != d) {
+            if (d < aux.dpi) {
+                aux = aux.hijoIzquierdoAVL;
+            } else {
+                aux = aux.hijoDerechoAVL;
+            }
+            if (aux == null) {
+                JOptionPane.showMessageDialog(null, "El registro del paciente no existe");
+                return null;
+            }
         }
-        if(existenciaNodo(cui)){
-            return;
-        }
-        
-        NodoArbol nuevo = new NodoArbol(nom, cui);
+        JOptionPane.showMessageDialog(null, "Paciente encontrado");
+        return aux;
+    }
 
+    public int obtenerFE(NodoArbolAVL x) {
+        if (x == null) {
+            return -1;
+        } else {
+            return x.fe;
+        }
+    }
+
+    public NodoArbolAVL rotacionIzquierda(NodoArbolAVL c) {
+        NodoArbolAVL auxiliar = c.hijoIzquierdoAVL;
+        c.hijoIzquierdoAVL = auxiliar.hijoDerechoAVL;
+        auxiliar.hijoDerechoAVL = c;
+        c.fe = Math.max(obtenerFE(c.hijoIzquierdoAVL), obtenerFE(c.hijoDerechoAVL)) + 1;
+        auxiliar.fe = Math.max(obtenerFE(auxiliar.hijoIzquierdoAVL), obtenerFE(auxiliar.hijoDerechoAVL)) + 1;
+        return auxiliar;
+    }
+
+    public NodoArbolAVL rotacionDerecha(NodoArbolAVL c) {
+        NodoArbolAVL auxiliar = c.hijoDerechoAVL;
+        c.hijoDerechoAVL = auxiliar.hijoIzquierdoAVL;
+        auxiliar.hijoIzquierdoAVL = c;
+        c.fe = Math.max(obtenerFE(c.hijoIzquierdoAVL), obtenerFE(c.hijoDerechoAVL)) + 1;
+        auxiliar.fe = Math.max(obtenerFE(auxiliar.hijoIzquierdoAVL), obtenerFE(auxiliar.hijoDerechoAVL)) + 1;
+        return auxiliar;
+    }
+
+    public NodoArbolAVL rotacionDobleIzquierda(NodoArbolAVL c) {
+        NodoArbolAVL temporal;
+        c.hijoIzquierdoAVL = rotacionDerecha(c.hijoIzquierdoAVL);
+        temporal = rotacionIzquierda(c);
+        return temporal;
+    }
+
+    public NodoArbolAVL rotacionDobleDerecha(NodoArbolAVL c) {
+        NodoArbolAVL temporal;
+        c.hijoDerechoAVL = rotacionIzquierda(c.hijoDerechoAVL);
+        temporal = rotacionDerecha(c);
+        return temporal;
+    }
+
+    public NodoArbolAVL insertarAVL(NodoArbolAVL nuevo, NodoArbolAVL subAr) {
+        NodoArbolAVL nuevoPadre = subAr;
+        if (nuevo.dpi < subAr.dpi) {
+            if (subAr.hijoIzquierdoAVL == null) {
+                subAr.hijoIzquierdoAVL = nuevo;
+            } else {
+                subAr.hijoIzquierdoAVL = insertarAVL(nuevo, subAr.hijoIzquierdoAVL);
+                if ((obtenerFE(subAr.hijoIzquierdoAVL) - obtenerFE(subAr.hijoDerechoAVL)) == 2) {
+                    if (nuevo.dpi < subAr.hijoIzquierdoAVL.dpi) {
+                        nuevoPadre = rotacionIzquierda(subAr);
+                    } else {
+                        nuevoPadre = rotacionDobleIzquierda(subAr);
+                    }
+                }
+            }
+        } else if (nuevo.dpi > subAr.dpi) {
+            if (subAr.hijoDerechoAVL == null) {
+                subAr.hijoDerechoAVL = nuevo;
+            } else {
+                subAr.hijoDerechoAVL = insertarAVL(nuevo, subAr.hijoDerechoAVL);
+                if ((obtenerFE(subAr.hijoDerechoAVL) - obtenerFE(subAr.hijoIzquierdoAVL)) == 2) {
+                    if (nuevo.dpi > subAr.hijoDerechoAVL.dpi) {
+                        nuevoPadre = rotacionDerecha(subAr);
+                    } else {
+                        nuevoPadre = rotacionDobleDerecha(subAr);
+                    }
+                }
+            }
+            //Nodo repetido
+        } else {
+            System.out.println("Nodo Duplicado");
+        }
+
+        //Actualizacion de altura
+        if ((subAr.hijoIzquierdoAVL == null) && (subAr.hijoDerechoAVL != null)) {
+            subAr.fe = subAr.hijoDerechoAVL.fe + 1;
+        } else if ((subAr.hijoDerechoAVL == null) && (subAr.hijoIzquierdoAVL != null)) {
+            subAr.fe = subAr.hijoIzquierdoAVL.fe + 1;
+        } else {
+            subAr.fe = Math.max(obtenerFE(subAr.hijoIzquierdoAVL), obtenerFE(subAr.hijoDerechoAVL)) + 1;
+        }
+        return nuevoPadre;
+    }
+
+    public void insertar(String nom, long d) {
+        NodoArbolAVL nuevo = new NodoArbolAVL(nom, d);
         if (raiz == null) {
             raiz = nuevo;
         } else {
-            NodoArbol auxiliar = raiz;
-            NodoArbol padre;
+            raiz = insertarAVL(nuevo, raiz);
+        }
+    }
 
-            while (true) {
-                padre = auxiliar;
-                if (cui < auxiliar.dpi) {
-                    auxiliar = auxiliar.HijoIzquierdo;
-                    if (auxiliar == null) {
-                        padre.HijoIzquierdo = nuevo;
-                        return;
-                    }
+    public NodoArbolAVL eliminarAVL(NodoArbolAVL nodo, long dpi) {
+        if (nodo == null) {
+            JOptionPane.showMessageDialog(null, "El registro del paciente no existe");
+            return null;
+        }
+
+        if (dpi < nodo.dpi) {
+            nodo.hijoIzquierdoAVL = eliminarAVL(nodo.hijoIzquierdoAVL, dpi);
+            if ((obtenerFE(nodo.hijoDerechoAVL) - obtenerFE(nodo.hijoIzquierdoAVL)) == 2) {
+                NodoArbolAVL hijoDerecho = nodo.hijoDerechoAVL;
+                if (obtenerFE(hijoDerecho.hijoIzquierdoAVL) > obtenerFE(hijoDerecho.hijoDerechoAVL)) {
+                    nodo = rotacionDobleDerecha(nodo);
                 } else {
-                    auxiliar = auxiliar.HijoDerecho;
-                    if (auxiliar == null) {
-                        padre.HijoDerecho = nuevo;
-                        return;
+                    nodo = rotacionDerecha(nodo);
+                }
+            }
+        } else if (dpi > nodo.dpi) {
+            nodo.hijoDerechoAVL = eliminarAVL(nodo.hijoDerechoAVL, dpi);
+            if ((obtenerFE(nodo.hijoIzquierdoAVL) - obtenerFE(nodo.hijoDerechoAVL)) == 2) {
+                NodoArbolAVL hijoIzquierdo = nodo.hijoIzquierdoAVL;
+                if (obtenerFE(hijoIzquierdo.hijoDerechoAVL) > obtenerFE(hijoIzquierdo.hijoIzquierdoAVL)) {
+                    nodo = rotacionDobleIzquierda(nodo);
+                } else {
+                    nodo = rotacionIzquierda(nodo);
+                }
+            }
+        } else {
+            if (nodo.hijoIzquierdoAVL == null || nodo.hijoDerechoAVL == null) {
+                nodo = (nodo.hijoIzquierdoAVL == null) ? nodo.hijoDerechoAVL : nodo.hijoIzquierdoAVL;
+            } else {
+                NodoArbolAVL temp = nodoMenor(nodo.hijoDerechoAVL);
+                nodo.dpi = temp.dpi;
+                nodo.nombre = temp.nombre;
+                nodo.hijoDerechoAVL = eliminarAVL(nodo.hijoDerechoAVL, temp.dpi);
+                if ((obtenerFE(nodo.hijoIzquierdoAVL) - obtenerFE(nodo.hijoDerechoAVL)) == 2) {
+                    NodoArbolAVL hijoIzquierdo = nodo.hijoIzquierdoAVL;
+                    if (obtenerFE(hijoIzquierdo.hijoDerechoAVL) > obtenerFE(hijoIzquierdo.hijoIzquierdoAVL)) {
+                        nodo = rotacionDobleIzquierda(nodo);
+                    } else {
+                        nodo = rotacionIzquierda(nodo);
                     }
                 }
             }
         }
-    }
-    
-    public boolean existenciaNodo(long cui){
-        return BuscarNodo(cui) != null;
-    }
 
-    public boolean EstaVacio() {
-        return raiz == null;
-    }
-
-    //Metodo para buscar un Nodo en el arbol
-    public NodoArbol BuscarNodo(long d) {
-        NodoArbol aux = raiz;
-        while (aux.dpi != d) {
-            if (d < aux.dpi) {
-                aux = aux.HijoIzquierdo;
-            } else {
-                aux = aux.HijoDerecho;
-            }
-            if (aux == null) {
-                return null;
-            }
+        if (nodo != null) {
+            nodo.fe = Math.max(obtenerFE(nodo.hijoIzquierdoAVL), obtenerFE(nodo.hijoDerechoAVL)) + 1;
         }
-        return aux;
+
+        return nodo;
     }
 
-    public boolean EliminarNodo(long d) {
-        NodoArbol auxiliar = raiz;
-        NodoArbol padre = raiz;
-        boolean EsHijoIzq = true;
-
-        while (auxiliar.dpi != d) {
-            padre = auxiliar;
-            if (d < auxiliar.dpi) {
-                EsHijoIzq = true;
-                auxiliar = auxiliar.HijoIzquierdo;
-            } else {
-                EsHijoIzq = false;
-                auxiliar = auxiliar.HijoDerecho;
-            }
-            if (auxiliar == null) {
-                return false; //nunca lo encontro
-            }
-        }//fin del while
-
-        if (auxiliar.HijoIzquierdo == null && auxiliar.HijoDerecho == null) { //caso para una hoja
-            if (auxiliar == raiz) {
-                raiz = null;
-            } else if (EsHijoIzq) {
-                padre.HijoIzquierdo = null;
-            } else {
-                padre.HijoDerecho = null;
-            }
-        } else if (auxiliar.HijoDerecho == null) {
-            if (auxiliar == raiz) {
-                raiz = auxiliar.HijoIzquierdo;
-            } else if (EsHijoIzq) {
-                padre.HijoIzquierdo = auxiliar.HijoIzquierdo;
-            } else {
-                padre.HijoDerecho = auxiliar.HijoIzquierdo;
-            }
-        } else if (auxiliar.HijoIzquierdo == null) {
-            if (auxiliar == raiz) {
-                raiz = auxiliar.HijoDerecho;
-            } else if (EsHijoIzq) {
-                padre.HijoIzquierdo = auxiliar.HijoDerecho;
-            } else {
-                padre.HijoDerecho = auxiliar.HijoDerecho;
-            }
-        } else {
-            NodoArbol reemplazo = ObtenerNodoReemplazo(auxiliar);
-            if (auxiliar == raiz) {
-                raiz = reemplazo;
-            } else if (EsHijoIzq) {
-                padre.HijoIzquierdo = reemplazo;
-            } else {
-                padre.HijoDerecho = reemplazo;
-            }
-            reemplazo.HijoIzquierdo = auxiliar.HijoIzquierdo;
+    public NodoArbolAVL nodoMenor(NodoArbolAVL nodo) {
+        while (nodo.hijoIzquierdoAVL != null) {
+            nodo = nodo.hijoIzquierdoAVL;
         }
-        return true;
+        return nodo;
     }
 
-    public NodoArbol ObtenerNodoReemplazo(NodoArbol nodoreemp) {
-        NodoArbol reemplazopadre = nodoreemp;
-        NodoArbol reemplazo = nodoreemp;
-        NodoArbol auxiliar = nodoreemp.HijoDerecho;
-
-        while (auxiliar != null) {
-            reemplazopadre = reemplazo;
-            reemplazo = auxiliar;
-            auxiliar = auxiliar.HijoIzquierdo;
-        }
-        if (reemplazo != nodoreemp.HijoDerecho) {
-            reemplazopadre.HijoIzquierdo = reemplazo.HijoDerecho;
-            reemplazo.HijoDerecho = nodoreemp.HijoDerecho;
-
-        }
-        System.out.println("\nEl nodo reemplazo es: " + reemplazo.dpi);
-        return reemplazo;
+    public void eliminar(long dpi) {
+        raiz = eliminarAVL(raiz, dpi);
     }
 
     public void cargarArchivo(File archivo) {
         try {
             BufferedReader leer = new BufferedReader(new FileReader(archivo));
-            //Salto de Linea para Encabezado del documento NOMBRE "TABULADOR" DPI
+            //PARA SALTARSE LINEA DE ENCABEZADO
             //leer.readLine();
             String linea;
             while ((linea = leer.readLine()) != null) {
-                //Separa el documento mediante tabulador
                 String[] partes = linea.split("\t");
-
-                //Guarda nombre y dpi en arreglos aparte
                 String nombre = partes[0];
                 String dpi = partes[1];
 
-                //
                 Pattern pt = Pattern.compile("\\d+");
                 Matcher mt = pt.matcher(dpi);
 
@@ -183,7 +223,7 @@ public class ArbolBinario {
                 }
 
                 Long dpiEntero = Long.parseLong(ndpi);
-                AgregarNodo(nombre, dpiEntero);
+                insertar(nombre, dpiEntero);
             }
             leer.close();
         } catch (Exception e) {
@@ -191,11 +231,11 @@ public class ArbolBinario {
         }
     }
 
-    public void imprimir(NodoArbol r, FileWriter guardar) {
+    public void imprimir(NodoArbolAVL r, FileWriter guardar) {
         try {
             if (r != null) {
-                imprimir(r.HijoIzquierdo, guardar);
-                imprimir(r.HijoDerecho, guardar);
+                imprimir(r.hijoIzquierdoAVL, guardar);
+                imprimir(r.hijoDerechoAVL, guardar);
                 String datos = r.nombre + "\t" + r.dpi + "\t"
                         + r.departamento + "\t" + r.municipio + "\t" + r.cantidadDosis + "\t"
                         + r.fechaPrimera + "\t" + r.fechaSegunda + "\t" + r.fechaTercera + "\t"
@@ -209,7 +249,8 @@ public class ArbolBinario {
 
     public void guardarArchivo() {
         try {
-            FileWriter guardar = new FileWriter("C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\PacientesGuardadosABB.txt");
+            FileWriter guardar = new FileWriter("C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\PacientesGuardadosAVL.txt");
+
             //Agrega Encabezado a documento
             //guardar.write("NOMBRE DE PERSONA VACUNADA" + "\t" + "NÚMERO DE IDENTIFICACIÓN" + "\n");
             imprimir(raiz, guardar);
@@ -222,18 +263,18 @@ public class ArbolBinario {
 
     //CODIGO PARA GRAPHVIZ
     //ASIGNA RELACIONES Y DECLARA VARIABLES
-    public void imprimirGraphviz(NodoArbol r, StringBuilder texto) {
+    public void imprimirGraphviz(NodoArbolAVL r, StringBuilder texto) {
         if (r != null) {
-            imprimirGraphviz(r.HijoIzquierdo, texto);
-            imprimirGraphviz(r.HijoDerecho, texto);
+            imprimirGraphviz(r.hijoIzquierdoAVL, texto);
+            imprimirGraphviz(r.hijoDerechoAVL, texto);
 
             texto.append(r.getDpi()).append("[label = \"").append(r.getNombre()).append("\"]\n");
 
-            if (r.HijoIzquierdo != null) {
-                texto.append(r.getDpi()).append("->").append(r.HijoIzquierdo.getDpi()).append("\n");
+            if (r.hijoIzquierdoAVL != null) {
+                texto.append(r.getDpi()).append("->").append(r.hijoIzquierdoAVL.getDpi()).append("\n");
             }
-            if (r.HijoDerecho != null) {
-                texto.append(r.getDpi()).append("->").append(r.HijoDerecho.getDpi()).append("\n");
+            if (r.hijoDerechoAVL != null) {
+                texto.append(r.getDpi()).append("->").append(r.hijoDerechoAVL.getDpi()).append("\n");
             }
         }
     }
@@ -275,23 +316,23 @@ public class ArbolBinario {
     //PROCESA Y CREA EL ARCHIVO PNG
     public void dibujarGraphviz() {
         try {
-            archivoGraphviz("archivoABB.dot", codigoGraphviz());
-            ProcessBuilder proceso = new ProcessBuilder("dot", "-Tpng", "-o", "arbolABB.png", "archivoABB.dot");
+            archivoGraphviz("archivoAVL.dot", codigoGraphviz());
+            ProcessBuilder proceso;
+            proceso = new ProcessBuilder("dot", "-Tpng", "-o", "arbolAVL.png", "archivoAVL.dot");
             proceso.redirectErrorStream(true);
             proceso.start();
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    //CODIFICACION DE INFORMACION DE ARBOL ABB
+    //CODIFICACION DE DATOS EN ARBOL AVL
     //REALIZA RECORRIDO Y DEFINE LOS CARACTERES PARA CODIFICAR
-    public void datosCodificar(NodoArbol r) {
+    public void datosCodificar(NodoArbolAVL r) {
         String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZÑÁÉÍÓÚ/1234567890";
         if (r != null) {
-            datosCodificar(r.HijoIzquierdo);
-            datosCodificar(r.HijoDerecho);
+            datosCodificar(r.hijoIzquierdoAVL);
+            datosCodificar(r.hijoDerechoAVL);
             r.nombre = codificarLetras(letras, r.nombre);
             r.dpi = codificarNumero(r.dpi);
             r.departamento = codificarLetras(letras, r.departamento);
@@ -305,11 +346,11 @@ public class ArbolBinario {
     }
 
     //REALIZA RECORRIDO Y DEFINE CARACTERES PARA DECODIFICAR
-    public void datosDecodificar(NodoArbol r) {
+    public void datosDecodificar(NodoArbolAVL r) {
         String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZÑÁÉÍÓÚ/1234567890";
         if (r != null) {
-            datosDecodificar(r.HijoIzquierdo);
-            datosDecodificar(r.HijoDerecho);
+            datosDecodificar(r.hijoIzquierdoAVL);
+            datosDecodificar(r.hijoDerechoAVL);
             r.nombre = decodificarLetras(letras, r.nombre);
             r.dpi = decodificarNumero(r.dpi);
             r.departamento = decodificarLetras(letras, r.departamento);
@@ -366,12 +407,12 @@ public class ArbolBinario {
     }
 
     //USAR RECORRIDO PARA GUARDAR INFORMACION CIFRADA
-    public void txtCrifrado(NodoArbol raiz) {
+    public void txtCrifrado(NodoArbolAVL raiz) {
         StringBuilder contenido = new StringBuilder();
 
         recorrerYCodificar(raiz, contenido);
 
-        try (BufferedWriter escribir = new BufferedWriter(new FileWriter("C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\PacientesGuardadosABB.txt"))) {
+        try (BufferedWriter escribir = new BufferedWriter(new FileWriter("C:\\Users\\luis-\\Documents\\NetBeansProjects\\Proyecto_Progra3\\src\\Archivo\\PacientesGuardadosAVL.txt"))) {
             escribir.write(contenido.toString());
             JOptionPane.showMessageDialog(null, "Datos codificados guardados correctamente.");
         } catch (IOException e) {
@@ -379,12 +420,11 @@ public class ArbolBinario {
         }
     }
 
-    private void recorrerYCodificar(NodoArbol r, StringBuilder contenido) {
+    private void recorrerYCodificar(NodoArbolAVL r, StringBuilder contenido) {
         if (r != null) {
-            //contenido.append(r.nombre).append("\t").append(r.dpi).append("\n");
             contenido.append(r.nombre).append("\t").append(r.dpi).append("\t").append(r.departamento).append("\t").append(r.municipio).append("\t").append(r.cantidadDosis).append("\t").append(r.fechaPrimera).append("\t").append(r.fechaSegunda).append("\t").append(r.lugarVacunacion).append("\n");
-            recorrerYCodificar(r.HijoIzquierdo, contenido);
-            recorrerYCodificar(r.HijoDerecho, contenido);
+            recorrerYCodificar(r.hijoIzquierdoAVL, contenido);
+            recorrerYCodificar(r.hijoDerechoAVL, contenido);
         }
     }
 
@@ -432,6 +472,7 @@ public class ArbolBinario {
         return Long.parseLong(numeroDecodificado.toString());
     }
 
+    //EDICION DE TABLA PARA AVL
     public void mostrarDatos(JTable informacion, int numero) {
         DefaultTableModel modelo = new DefaultTableModel();
 
@@ -460,30 +501,30 @@ public class ArbolBinario {
         informacion.setModel(modelo);
     }
 
-    public void imprimirTablaPreorden(NodoArbol r, DefaultTableModel modelo) {
+    public void imprimirTablaPreorden(NodoArbolAVL r, DefaultTableModel modelo) {
         if (r != null) {
             Object[] dTabla = {r.nombre, r.dpi, r.departamento, r.municipio, r.cantidadDosis, r.fechaPrimera, r.fechaSegunda, r.fechaTercera, r.lugarVacunacion};
             modelo.addRow(dTabla);
 
-            imprimirTablaPreorden(r.HijoIzquierdo, modelo);
-            imprimirTablaPreorden(r.HijoDerecho, modelo);
+            imprimirTablaPreorden(r.hijoIzquierdoAVL, modelo);
+            imprimirTablaPreorden(r.hijoDerechoAVL, modelo);
         }
     }
 
-    public void imprimirTablaInorden(NodoArbol r, DefaultTableModel modelo) {
+    public void imprimirTablaInorden(NodoArbolAVL r, DefaultTableModel modelo) {
         if (r != null) {
-            imprimirTablaInorden(r.HijoIzquierdo, modelo);
+            imprimirTablaInorden(r.hijoIzquierdoAVL, modelo);
 
             Object[] dTabla = {r.nombre, r.dpi, r.departamento, r.municipio, r.cantidadDosis, r.fechaPrimera, r.fechaSegunda, r.fechaTercera, r.lugarVacunacion};
             modelo.addRow(dTabla);
-            imprimirTablaInorden(r.HijoDerecho, modelo);
+            imprimirTablaInorden(r.hijoDerechoAVL, modelo);
         }
     }
 
-    public void imprimirTablaPostorden(NodoArbol r, DefaultTableModel modelo) {
+    public void imprimirTablaPostorden(NodoArbolAVL r, DefaultTableModel modelo) {
         if (r != null) {
-            imprimirTablaPostorden(r.HijoIzquierdo, modelo);
-            imprimirTablaPostorden(r.HijoDerecho, modelo);
+            imprimirTablaPostorden(r.hijoIzquierdoAVL, modelo);
+            imprimirTablaPostorden(r.hijoDerechoAVL, modelo);
 
             Object[] dTabla = {r.nombre, r.dpi, r.departamento, r.municipio, r.cantidadDosis, r.fechaPrimera, r.fechaSegunda, r.fechaTercera, r.lugarVacunacion};
             modelo.addRow(dTabla);
